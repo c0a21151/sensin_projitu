@@ -6,7 +6,8 @@
         <title>テスト</title>
     </head>      
 <body>
-<h1>ログインページ</h1>
+<h1>オカルトサイト</h1>
+ログインしてください
 
 <form action= "./LoginSessionServlet" method="post">
 ユーザ名：<input type="text" name="userid" required><br>
