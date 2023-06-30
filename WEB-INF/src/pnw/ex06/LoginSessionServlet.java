@@ -48,9 +48,9 @@ public class LoginSessionServlet extends HttpServlet {
 		try {
 			/** DB接続に関する共通部 START **/
 			// DB接続してStatementを取得する．
-			PnwDB db = new PnwDB("testdb");
+			PnwDB db = new PnwDB("2023g04");
 			// SQL文の作成(プレースホルダーを使うのがわかりやすい)
-			String sql = "SELECT * FROM userinfo where userid=? and password=?";
+			String sql = "SELECT * FROM login_id where username=? and password=?";
 			PreparedStatement stmt = db.getStmt(sql);
 			/** DB接続に関する共通部 END **/
 
@@ -65,9 +65,9 @@ public class LoginSessionServlet extends HttpServlet {
 				// カラムの値を取得する．
 				String id = rs.getString("userid");
 				String pass = rs.getString("password");
-				//beanを生成
+				// beanを生成
 				UserInfoBean bean = new UserInfoBean(id, pass);
-				//Listへbeanを追加する．
+				// Listへbeanを追加する．
 				infoArray.add(bean);
 				// 見つかった
 				cnt++;
@@ -76,13 +76,13 @@ public class LoginSessionServlet extends HttpServlet {
 				// 見つからない == 認証失敗
 				forwardURL = "/ex06/sessionfailure.jsp";
 			} else {
-				
+
 				HttpSession session = request.getSession();
-				//Listの先頭を取得
+				// Listの先頭を取得
 				UserInfoBean info = infoArray.get(0);
-				//Sessionへセットする．
+				// Sessionへセットする．
 				session.setAttribute("user", info);
-				
+
 				forwardURL = "/ex06/sessionsuccess.jsp";
 
 			}
